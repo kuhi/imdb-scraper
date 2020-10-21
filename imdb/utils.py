@@ -10,7 +10,7 @@ from imdb import movie
 logging.basicConfig(level=logging.INFO)
 
 
-def process_chart(response: str, top: int = 10) -> List[movie.ImdbMovieEntry]:
+def process_chart(response: str, top: int = 10, extra_info: bool = False) -> List[movie.ImdbMovieEntry]:
     logging.info("Processing HTML page.")
     soup = BeautifulSoup(response, features="html.parser")
     titles = list()
@@ -22,7 +22,7 @@ def process_chart(response: str, top: int = 10) -> List[movie.ImdbMovieEntry]:
     if skip_first is not None:
         movie_element = next(movies_iter, None)
         while movie_element is not None and counter < top:
-            movie_entry = movie.ImdbMovieEntry(movie_element)
+            movie_entry = movie.ImdbMovieEntry(movie_element, extra_info)
             logging.info(f"ImdbMovieEntry: {str(movie_entry)}")
             titles.append(movie_entry)
             counter += 1

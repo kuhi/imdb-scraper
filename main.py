@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO)
 
 def run(path, file_format, min_rating, top, extra_info=False):
     data = get_imdb_data("http://www.imdb.com/chart/top")
-    movie_list = process_chart(data, top)
+    movie_list = process_chart(data, top, extra_info)
     df = get_pandas_dataframe(movie_list, extra_info, min_rating)
     if file_format == "csv":
         df.to_csv(path)
