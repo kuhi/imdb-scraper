@@ -56,11 +56,7 @@ class ImdbMovieEntry:
     def extract_extra_info(element: BeautifulSoup) -> dict:
         extra_info = dict()
         # First, we need the url to the movie page
-        url = (
-            element.find("td", {"class": "titleColumn"})
-            .find("a")
-            .attrs.get("href")
-        )
+        url = element.find("td", {"class": "titleColumn"}).find("a").attrs.get("href")
         if url:
             full_url = f"https://www.imdb.com/{url}"
             response = utils.get_imdb_data(full_url)
@@ -74,7 +70,7 @@ class ImdbMovieEntry:
             extra_info = {
                 "time": title_subtext[1].contents,
                 "genre": title_subtext[3].contents,
-                "released": title_subtext[5].contents
+                "released": title_subtext[5].contents,
             }
 
         return extra_info

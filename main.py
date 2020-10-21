@@ -14,11 +14,13 @@ def run(path, file_format, min_rating, top, extra_info=False):
         df.to_csv(path)
     elif file_format == "pdf":
         if extra_info:
-            logging.warning("Extra info is only displayed when exporting in CSV format.")
+            logging.warning(
+                "Extra info is only displayed when exporting in CSV format."
+            )
         bar = df.plot.barh(
             x="title",
-            color=[(.45, (rating/10)*0.8, 0) for rating in df["rating"]],
-            figsize=(10, len(df)*0.5)
+            color=[(0.45, (rating / 10) * 0.8, 0) for rating in df["rating"]],
+            figsize=(10, len(df) * 0.5),
         )
         bar.set_xlim([6.0, 10.0])
         for index, value in enumerate(df["rating"]):
@@ -32,9 +34,7 @@ if __name__ == "__main__":
         description="Get top X Movies off of imdb and export information about them."
     )
     arg_parser.add_argument("--path", "-p", required=True, type=str)
-    arg_parser.add_argument(
-        "--format", "-f", choices=["pdf", "csv"], default="csv"
-    )
+    arg_parser.add_argument("--format", "-f", choices=["pdf", "csv"], default="csv")
     arg_parser.add_argument(
         "--min_rating",
         "-m",
@@ -42,9 +42,7 @@ if __name__ == "__main__":
         required=False,
         default=0,
     )
-    arg_parser.add_argument(
-        "--top", "-t", type=int, required=False, default=10
-    )
+    arg_parser.add_argument("--top", "-t", type=int, required=False, default=10)
     arg_parser.add_argument("--extra_info", "-x", action="store_true")
     args = arg_parser.parse_args()
     run(

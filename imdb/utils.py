@@ -42,7 +42,9 @@ def get_imdb_data(url: str) -> str:
 
 
 def get_pandas_dataframe(
-    movies_list: List[movie.ImdbMovieEntry], extra_info: bool = False, min_rating: float = 0
+    movies_list: List[movie.ImdbMovieEntry],
+    extra_info: bool = False,
+    min_rating: float = 0,
 ) -> pd.DataFrame:
     logging.info("Converting list of ImdbMovieEntry into a pandas DataFrame.")
 
