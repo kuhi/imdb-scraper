@@ -10,7 +10,9 @@ from imdb import movie
 logging.basicConfig(level=logging.INFO)
 
 
-def process_chart(response: str, top: int = 10, extra_info: bool = False) -> List[movie.ImdbMovieEntry]:
+def process_chart(
+    response: str, top: int = 10, extra_info: bool = False
+) -> List[movie.ImdbMovieEntry]:
     logging.info("Processing HTML page.")
     soup = BeautifulSoup(response, features="html.parser")
     titles = list()

@@ -13,10 +13,12 @@ Run `pip install -r requirements.pip`.
 - `format` - pdf/csv. Format in which to export, PDF is a histogram. (default is CSV)
 - `min_rating` - Float. Minimum score of the exported movies.
 - `top` - Integer. Amount of movies to export. (default is 10)
--
+- `extra_info` - Bool. When checked, provides extra information for each title (running time, genres, date of release).
 
 If both `min_rating` and `top` are defined, top X are grabbed from the list of
 all movies with a score of at least `min_rating`.
+
+`extra_info` only works when `format` is csv.
 
 ### Examples
 
@@ -29,8 +31,6 @@ off.
 
 This command will return a csv of the top 10 movies and provide additional information about the movie's genre,
 running time and date of release.
-
-## Testing
 
 ## Dev notes
 This repository uses black for code formatting (https://github.com/psf/black).

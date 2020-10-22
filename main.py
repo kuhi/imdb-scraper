@@ -11,7 +11,7 @@ def run(path, file_format, min_rating, top, extra_info=False):
     movie_list = process_chart(data, top, extra_info)
     df = get_pandas_dataframe(movie_list, extra_info, min_rating)
     if file_format == "csv":
-        df.to_csv(path)
+        df.to_csv(path, encoding='utf-8')
     elif file_format == "pdf":
         if extra_info:
             logging.warning(

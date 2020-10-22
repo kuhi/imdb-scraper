@@ -63,16 +63,24 @@ class ImdbMovieEntry:
             response = utils.get_imdb_data(full_url)
             soup = BeautifulSoup(response, features="html.parser")
             # Get the movie's header, or its 'title'
-            title_subtext = soup.find("div", id="title-overview-widget").find("div", {"class": "subtext"})
+            title_subtext = soup.find("div", id="title-overview-widget").find(
+                "div", {"class": "subtext"}
+            )
 
             time = title_subtext.find("time").contents[0].strip()
             genre_regex = re.compile("^.+genres$")
             genres = ",".join(
-                [str(genre.contents[0]) for genre in title_subtext.findAll("a") if genre_regex.match(genre.attrs["href"])]
+                [
+                    str(genre.contents[0])
+                    for genre in title_subtext.findAll("a")
+                    if genre_regex.match(genre.attrs["href"])
+                ]
             )
-            released =[
-                str(released.contents[0]) for released in title_subtext.findAll("a")
-                if "title" in released.attrs and released.attrs["title"] == "See more release dates"
+            released = [
+                str(released.contents[0])
+                for released in title_subtext.findAll("a")
+                if "title" in released.attrs
+                and released.attrs["title"] == "See more release dates"
             ][0].strip()
 
             extra_info = {
@@ -80,5 +88,4 @@ class ImdbMovieEntry:
                 "genre(s)": genres,
                 "released": released,
             }
-        print(extra_info)
         return extra_info
